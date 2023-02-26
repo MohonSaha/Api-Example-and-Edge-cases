@@ -3,8 +3,8 @@
 const loadMeals = (searchText) => {
     const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchText}`;
     fetch(url)
-    .then(res => res.json())
-    .then(data => displayMeals(data.meals))
+        .then(res => res.json())
+        .then(data => displayMeals(data.meals))
 }
 
 // Display meals 
@@ -45,7 +45,8 @@ const searchMeals = () => {
 }
 
 
-const loadMealDetail = (mealId) => {
+// fetch than example: 
+/* const loadMealDetail = (mealId) => {
     const url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`;
     fetch(url)
     .then(res => res.json())
@@ -53,7 +54,18 @@ const loadMealDetail = (mealId) => {
     .catch(error => {
         console.log(error);
     })
+} 
+*/
+
+
+// async await example: 
+const loadMealDetail = async (mealId) => {
+    const url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`;
+    const res = await fetch(url);
+    const data = await res.json();
+    displayMealDetails(data.meals[0]);   
 }
+
 
 const displayMealDetails = (meal) => {
     document.getElementById('mealsDetailsModalLabel').innerText = meal.strMeal;
